@@ -22,14 +22,32 @@ function showFortune(evt) {
 document.querySelector('#get-fortune-button').addEventListener('click', showFortune);
 
 // PART 2: SHOW WEATHER
+/*
+ You’ll need to decide which kind of AJAX call to make, 
+ and how to extract the forecast from the JSON object you get back.
+
+We need to send the zip code to the server. 
+If you aren’t sure how to do this for a GET request, refer to the lecture notes or documentation.
+*/
 
 function showWeather(evt) {
   evt.preventDefault();
 
-  const url = '/weather.json';
+
   const zipcode = document.querySelector('#zipcode-field').value;
 
   // TODO: request weather with that URL and show the forecast in #weather-info
+  //create a fetch request to grab the url 
+  //({ order: 123 }) -> pulling the forcast from the weather info obj
+  const queryString = new URLSearchParams ({ 'zipcode': zipcode }).toString();
+  const url = `weather.json?${queryString}`;
+  fetch(url)
+  //
+  .then((response) => response.json())
+  //
+  .then((responseData) => {
+    document.querySelector('#weather-info').innerHTML = responseData['forecast'];
+  });
 }
 
 document.querySelector('#weather-form').addEventListener('submit', showWeather);

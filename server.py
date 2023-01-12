@@ -59,9 +59,12 @@ def order_melons():
     if qty > 10:
         result_code = 'ERROR'
         result_text = "You can't buy more than 10 melons"
-    elif qty > 0:
+    elif qty > 1:
         result_code = 'OK'
         result_text = f"You have bought {qty} {melon} melons"
+    elif qty == 1:
+        result_code = 'OK'
+        result_text = f"You have bought {qty} {melon} melon"
     else:
         result_code = 'ERROR'
         result_text = "You want to buy fewer than 1 melons? Huh?"

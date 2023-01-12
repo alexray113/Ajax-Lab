@@ -118,11 +118,21 @@ function orderMelons(evt) {
     },
     })
     .then((response)=> response.json())
-    .then((responseJson)=>{
-      alert(responseJson['msg']);
+    .then((responseJson)=> {
+      if (responseJson['code'] == "ERROR"){
+      
+        document.querySelector('#order-status').classList.add('order-error');
+        document.querySelector('#order-status').innerHTML = responseJson['msg'];
+    }
+      else {
+        document.querySelector('#order-status').classList.remove('order-error');
+        document.querySelector('#order-status').innerHTML = responseJson['msg'];
+        // alert(responseJson['msg']);
+      }
     });
   }
-  // TODO: show the result message after your form 
+  
+  // TODO: show the result message after your form x
   // TODO: if the result code is ERROR, make it show up in red (see our CSS!)
-
+      //if the result_code == error then .classList.add(red)
 document.querySelector('#order-form').addEventListener('submit', orderMelons);
